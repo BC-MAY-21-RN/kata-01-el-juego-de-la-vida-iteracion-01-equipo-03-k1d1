@@ -1,7 +1,7 @@
 const { Input, AutoComplete } = require('enquirer');
 
 let grid = [
-    ['0', '0', 'x', '0', '0', '0', '0'],
+    ['x', '0', '0', '0', '0', '0', '0'],
     ['0', '0', '0', '0', '0', '0', '0'],
     ['0', '0', '0', '0', '0', '0', '0'],
     ['0', '0', '0', '0', '0', '0', '0'],
@@ -23,31 +23,48 @@ const askColumna = new Input({
 
 function changeValue(x, y, v) {
 
-    let fila_arriba=x-1;
-    let fila_abajo=x+1;
-
-
-    grid.forEach((element,index) => {
-
-        let izquierda=false;
-        let derecha=false;
-        let arriba=false;
-        let abajo=false;
-
-        if (x==index){
+    grid.forEach((element,index )=> {
+        if (x==index)
+        {
             element[y]= v;
         }
-        if(fila_arriba==index){
-            element[y];
-            if(element[y]!=0)
-            {
-                arrriba=true;
-            }
-        }
-
-        console.log(arriba+"esta viva");
-
     });
+
+}
+
+function isLife(){
+
+    let pos=-1;
+   // grid.forEach((element,index )=> {
+        
+    //});
+
+    
+        console.log(grid[0][0]);
+    
+
+
+
+     /*
+    let fila_arriba=x-1;
+    let fila_abajo=x+1;
+    let izquierda=false;
+    let derecha=false;
+    let arriba=false;
+    let abajo=false;
+
+   
+    if(fila_arriba==index){
+            
+        element[y];
+        console.log(element[y]);
+        if(element[y]!='0')
+        {
+            arrriba=true;
+        }
+    }
+    */
+    console.log(' esta viva ');
 }
 
 
@@ -64,7 +81,9 @@ const run = async () => {
     const fila = await askFila.run()
     const columna = await askColumna.run()
     changeValue(fila, columna, "x")
+    
     printArray();
+    isLife()
     //await run();
 }
 
