@@ -10,10 +10,19 @@ const askColumna = new Input({
     message: 'Ingrese la columna'
 })
 
+const isNumber = (n) => { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); }
+
+let filas
+let columnas
+let tabla
 
 const run = async () => {
     const fila = await askFila.run()
     const columna = await askColumna.run()
+	filas = isNumber(fila) ? parseInt(fila) : 4 // Fila 4 por defecto
+	columnas = isNumber(columna) ? parseInt(columna) : 8 // Columnas 8 por defecto
+
+	console.log(filas, columnas)
 }
 
 run();
