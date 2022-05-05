@@ -18,7 +18,6 @@ let tabla
 let proximaTabla
 
 const condicionesDeVida = () => {
-	proximaTabla = tabla
 	for (let x = 1; x < filas - 1; x++) {
         for (let y = 1; y < columnas - 1; y++) {
 			let vecinos = 0;
@@ -30,12 +29,17 @@ const condicionesDeVida = () => {
 			vecinos -= tabla[x][y]
 			console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Vecinos: ' + vecinos)
 			if ((tabla[x][y] == 1) && (vecinos < 2)) { // 1. Cualquier célula viva con menos de dos vecinas vivas muere, como si la causa fuera la subpoblación.
-				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Muere')
+				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Muere por regla 1')
 				console.log('antes: ', proximaTabla[x][y]);
 				proximaTabla[x][y] = 0
 				console.log('despues: ', proximaTabla[x][y]);
 			}
-			// 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
+			if ((tabla[x][y] == 1) && (vecinos > 3)) {// 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
+				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Muere por regla 2')
+				console.log('antes: ', proximaTabla[x][y]);
+				proximaTabla[x][y] = 0
+				console.log('despues: ', proximaTabla[x][y]);
+			}
 			// 3. Cualquier celda viva con dos o tres vecinos vivos vive en la próxima generación.
 			// 4. Cualquier celda muerta con exactamente tres vecinos vivos se convierte en una celda viva.
 		}
