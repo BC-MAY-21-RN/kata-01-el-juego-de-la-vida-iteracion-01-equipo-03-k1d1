@@ -22,13 +22,20 @@ const run = async () => {
     const columna = await askColumna.run()
 	filas = isNumber(fila) ? parseInt(fila) : 4 // Fila 4 por defecto
 	columnas = isNumber(columna) ? parseInt(columna) : 8 // Columnas 8 por defecto
-	tabla = new Array(filas);
+	tabla = new Array(filas)
 	for (let i = 0; i < filas; i++) {
 		tabla[i] = new Array(columnas)
 	}
-	proximaTabla = new Array(filas);
+	proximaTabla = new Array(filas)
 	for (let i = 0; i < filas; i++) {
 		proximaTabla[i] = new Array(columnas)
+	}
+	for (let i = 0; i < filas; i++) {
+		for (let j = 0; j < columnas; j++) {
+			if (i == 0 || j == 0 || i == filas-1 || j == columnas-1) tabla[i][j] = 0
+			else tabla[i][j] = Math.round(Math.random() * (1 - 0) + 0)
+			proximaTabla[i][j] = 0
+    	}
 	}
 	console.log(filas, columnas, tabla, proximaTabla)
 }
