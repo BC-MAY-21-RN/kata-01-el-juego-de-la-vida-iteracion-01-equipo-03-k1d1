@@ -15,14 +15,22 @@ const isNumber = (n) => { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); }
 let filas
 let columnas
 let tabla
+let proximaTabla
 
 const run = async () => {
     const fila = await askFila.run()
     const columna = await askColumna.run()
 	filas = isNumber(fila) ? parseInt(fila) : 4 // Fila 4 por defecto
 	columnas = isNumber(columna) ? parseInt(columna) : 8 // Columnas 8 por defecto
-
-	console.log(filas, columnas)
+	tabla = new Array(filas);
+	for (let i = 0; i < filas; i++) {
+		tabla[i] = new Array(columnas)
+	}
+	proximaTabla = new Array(filas);
+	for (let i = 0; i < filas; i++) {
+		proximaTabla[i] = new Array(columnas)
+	}
+	console.log(filas, columnas, tabla, proximaTabla)
 }
 
 run();
