@@ -34,13 +34,18 @@ const condicionesDeVida = () => {
 				proximaTabla[x][y] = 0
 				console.log('despues: ', proximaTabla[x][y]);
 			}
-			if ((tabla[x][y] == 1) && (vecinos > 3)) {// 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
+			if ((tabla[x][y] == 1) && (vecinos > 3)) { // 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
 				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Muere por regla 2')
 				console.log('antes: ', proximaTabla[x][y]);
 				proximaTabla[x][y] = 0
 				console.log('despues: ', proximaTabla[x][y]);
 			}
-			// 3. Cualquier celda viva con dos o tres vecinos vivos vive en la próxima generación.
+			if ((tabla[x][y] == 1) && (vecinos == 2 || vecinos == 3)) { // 3. Cualquier celda viva con dos o tres vecinos vivos vive en la próxima generación.
+				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Sigue con vida por regla 3')
+				console.log('antes: ', proximaTabla[x][y]);
+				proximaTabla[x][y] = 1
+				console.log('despues: ', proximaTabla[x][y]);
+			}
 			// 4. Cualquier celda muerta con exactamente tres vecinos vivos se convierte en una celda viva.
 		}
 	}
