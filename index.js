@@ -16,6 +16,9 @@ let filas
 let columnas
 let tabla
 let proximaTabla
+let muere = 0
+let vive = 0
+let revive = 0
 
 const condicionesDeVida = () => {
 	for (let x = 1; x < filas - 1; x++) {
@@ -29,24 +32,33 @@ const condicionesDeVida = () => {
 			vecinos -= tabla[x][y]
 			console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Vecinos: ' + vecinos)
 			if ((tabla[x][y] == 1) && (vecinos < 2)) { // 1. Cualquier célula viva con menos de dos vecinas vivas muere, como si la causa fuera la subpoblación.
+				muere++
 				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Muere por regla 1')
 				console.log('antes: ', proximaTabla[x][y]);
 				proximaTabla[x][y] = 0
 				console.log('despues: ', proximaTabla[x][y]);
 			}
-			if ((tabla[x][y] == 1) && (vecinos > 3)) { // 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
+			else if ((tabla[x][y] == 1) && (vecinos > 3)) { // 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
+				muere++
 				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Muere por regla 2')
 				console.log('antes: ', proximaTabla[x][y]);
 				proximaTabla[x][y] = 0
 				console.log('despues: ', proximaTabla[x][y]);
 			}
-			if ((tabla[x][y] == 1) && (vecinos == 2 || vecinos == 3)) { // 3. Cualquier celda viva con dos o tres vecinos vivos vive en la próxima generación.
+			else if ((tabla[x][y] == 1) && (vecinos == 2 || vecinos == 3)) { // 3. Cualquier celda viva con dos o tres vecinos vivos vive en la próxima generación.
+				vive++
 				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Sigue con vida por regla 3')
 				console.log('antes: ', proximaTabla[x][y]);
 				proximaTabla[x][y] = 1
 				console.log('despues: ', proximaTabla[x][y]);
 			}
-			// 4. Cualquier celda muerta con exactamente tres vecinos vivos se convierte en una celda viva.
+			else if ((tabla[x][y] == 0) && (vecinos == 3)) { // 4. Cualquier celda muerta con exactamente tres vecinos vivos se convierte en una celda viva.
+				revive++
+				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' revive por regla 4')
+				console.log('antes: ', proximaTabla[x][y]);
+				proximaTabla[x][y] = 1
+				console.log('despues: ', proximaTabla[x][y]);
+			}
 		}
 	}
 }
@@ -80,7 +92,9 @@ const run = async () => {
 	proximaTabla.forEach(f => {
         console.log(f.join(' '))
     })
-	console.log(filas, columnas)
+	console.log('Celulas muestas: ', muere)
+	console.log('Celulas con suerte: ', vive)
+	console.log('Celulas revividas: ', revive)
 }
 
 run();
