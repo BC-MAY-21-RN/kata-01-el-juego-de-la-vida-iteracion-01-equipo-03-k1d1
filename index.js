@@ -84,7 +84,11 @@ const run = async () => {
     
     printArray();
     isLife()
-    //await run();
 }
 
 run();
+
+// 1. Cualquier célula viva con menos de dos vecinas vivas muere, como si la causa fuera la subpoblación.
+// 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
+// 3. Cualquier celda viva con dos o tres vecinos vivos vive en la próxima generación.
+// 4. Cualquier celda muerta con exactamente tres vecinos vivos se convierte en una celda viva.
