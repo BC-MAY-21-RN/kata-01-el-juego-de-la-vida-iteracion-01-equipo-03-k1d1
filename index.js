@@ -98,3 +98,5 @@ const run = async () => {
 }
 
 run();
+
+// Juego de la Vida culminada
