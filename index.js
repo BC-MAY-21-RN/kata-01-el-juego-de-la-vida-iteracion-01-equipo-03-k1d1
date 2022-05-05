@@ -17,6 +17,14 @@ let columnas
 let tabla
 let proximaTabla
 
+const condicionesDeVida = () => {
+	for (let x = 1; x < filas - 1; x++) {
+        for (let y = 1; y < columnas - 1; y++) {
+			let vecinos = 0;
+		}
+	}
+}
+
 const run = async () => {
     const fila = await askFila.run()
     const columna = await askColumna.run()
@@ -37,6 +45,7 @@ const run = async () => {
 			proximaTabla[i][j] = 0
     	}
 	}
+	condicionesDeVida()
 	console.log(filas, columnas, tabla, proximaTabla)
 }
 
