@@ -20,7 +20,15 @@ let proximaTabla
 const condicionesDeVida = () => {
 	for (let x = 1; x < filas - 1; x++) {
         for (let y = 1; y < columnas - 1; y++) {
+			console.log('Data: ', tabla[x][y])
 			let vecinos = 0;
+			for (let i = -1; i <= 1; i++) {
+				for (let j = -1; j <= 1; j++) {
+					vecinos += tabla[x+i][y+j];
+				}
+			}
+			vecinos -= tabla[x][y]
+			console.log('x: ' + x + ' y: ' + y + ' Vecinos: ' + vecinos)
 		}
 	}
 }
@@ -46,7 +54,13 @@ const run = async () => {
     	}
 	}
 	condicionesDeVida()
-	console.log(filas, columnas, tabla, proximaTabla)
+	tabla.forEach(f => {
+        console.log(f.join(' '))
+    })
+	proximaTabla.forEach(f => {
+        console.log(f.join(' '))
+    })
+	console.log(filas, columnas)
 }
 
 run();
