@@ -19,5 +19,8 @@
   "homepage": "https://github.com/BC-MAY-21-RN/kata-01-el-juego-de-la-vida-iteracion-01-equipo-03-k1d1#readme",
   "dependencies": {
     "enquirer": "^2.3.6"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0"
   }
 }
