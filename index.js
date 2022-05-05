@@ -18,9 +18,9 @@ let tabla
 let proximaTabla
 
 const condicionesDeVida = () => {
+	proximaTabla = tabla
 	for (let x = 1; x < filas - 1; x++) {
         for (let y = 1; y < columnas - 1; y++) {
-			console.log('Data: ', tabla[x][y])
 			let vecinos = 0;
 			for (let i = -1; i <= 1; i++) {
 				for (let j = -1; j <= 1; j++) {
@@ -28,7 +28,16 @@ const condicionesDeVida = () => {
 				}
 			}
 			vecinos -= tabla[x][y]
-			console.log('x: ' + x + ' y: ' + y + ' Vecinos: ' + vecinos)
+			console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Vecinos: ' + vecinos)
+			if ((tabla[x][y] == 1) && (vecinos < 2)) { // 1. Cualquier célula viva con menos de dos vecinas vivas muere, como si la causa fuera la subpoblación.
+				console.log('celula: ' + tabla[x][y] + ' x: ' + x + ' y: ' + y + ' Muere')
+				console.log('antes: ', proximaTabla[x][y]);
+				proximaTabla[x][y] = 0
+				console.log('despues: ', proximaTabla[x][y]);
+			}
+			// 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
+			// 3. Cualquier celda viva con dos o tres vecinos vivos vive en la próxima generación.
+			// 4. Cualquier celda muerta con exactamente tres vecinos vivos se convierte en una celda viva.
 		}
 	}
 }
@@ -54,9 +63,11 @@ const run = async () => {
     	}
 	}
 	condicionesDeVida()
+	console.log('Generacion 1')
 	tabla.forEach(f => {
         console.log(f.join(' '))
     })
+	console.log('Generacion 2')
 	proximaTabla.forEach(f => {
         console.log(f.join(' '))
     })
@@ -64,8 +75,3 @@ const run = async () => {
 }
 
 run();
-
-// 1. Cualquier célula viva con menos de dos vecinas vivas muere, como si la causa fuera la subpoblación.
-// 2. Cualquier celda viva con más de tres vecinos vivos muere, como por hacinamiento.
-// 3. Cualquier celda viva con dos o tres vecinos vivos vive en la próxima generación.
-// 4. Cualquier celda muerta con exactamente tres vecinos vivos se convierte en una celda viva.
